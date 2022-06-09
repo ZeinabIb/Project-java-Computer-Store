@@ -1,0 +1,187 @@
+import java.util.Scanner;
+public class Mobile {
+	private String manufactures;
+	private int storage;
+	private double batteryHealth;
+	private boolean hasTwoSIMcard;
+	private double brandPrice;
+	private double totalPrice;
+	
+	public Mobile()
+	{
+		this.manufactures = "Apple";
+		this.storage = 32;	 // 8 16 32 64 128 GB
+		this.batteryHealth= 80;
+		this.hasTwoSIMcard = true;
+	}
+	
+	public Mobile(String manufactures, double screenSize, int storage
+			,double batteryHealth, boolean hasTwoSIMcard)
+	{
+		if(manufactures.equalsIgnoreCase("Apple")||manufactures.equalsIgnoreCase("Samsung")||
+				manufactures.equalsIgnoreCase("Huwei")||manufactures.equalsIgnoreCase("Nokia"))
+			this.manufactures= manufactures;
+		
+		else {
+			System.out.println("Manufacturie not valide! Manufacturie set Apple.");
+			this.manufactures="Apple";
+		}
+					
+		
+		if(storage == 8 || storage == 16 || storage == 32 || storage == 64 
+				||storage == 128)
+			this.storage = storage;
+		else {
+			System.out.println("Storage default set to 32GB");
+			this.storage = 32;
+		}
+		
+		if(batteryHealth < 50 || batteryHealth > 100) {
+			System.out.println(batteryHealth < 50 ?"Battery Health can't be less than 50%!":"Input Error!");
+			System.out.println("Battery health set 80%.");
+			this.batteryHealth=80;
+		}
+			
+		else
+			this.batteryHealth=batteryHealth;
+		this.hasTwoSIMcard = hasTwoSIMcard;	
+	}
+
+	public String getManufactures() {
+		return this.manufactures;
+	}
+
+	public void setManufactures(String manufactures) {	
+		Scanner scan = new Scanner(System.in);
+		if(manufactures.equalsIgnoreCase("Apple")||manufactures.equalsIgnoreCase("Samsung")||
+				manufactures.equalsIgnoreCase("Huwei")||manufactures.equalsIgnoreCase("Nokia"))
+			this.manufactures= manufactures;
+		else {
+			System.out.println("Manufacturie not valide! Re-Enter Manufacturie: ");
+			manufactures = scan.nextLine();
+			if(manufactures.equalsIgnoreCase("Apple")||manufactures.equalsIgnoreCase("Samsung")||
+					manufactures.equalsIgnoreCase("Huwei")||manufactures.equalsIgnoreCase("Nokia"))
+			this.manufactures=manufactures;
+			else {
+				System.out.println("Manufacturie not valide!Manufacturie set to Apple.");
+				this.manufactures ="Apple";
+			}
+		}
+	}
+
+	public int getStorage() {
+		return this.storage;
+	}
+
+	public void setStorage(int storage) {
+
+		if(storage == 8 || storage == 16 || storage == 32 || storage == 64 
+				||storage == 128)
+			this.storage = storage;
+		else {
+			System.out.println("Storage default set to 32GB");
+			this.storage = 32;
+		}
+	}
+
+	public double getBatteryHealth() {
+		return this.batteryHealth;
+	}
+
+	public void setBatteryHealth(double batteryHealth) {
+		
+		if(batteryHealth < 50 || batteryHealth > 100) {
+			System.out.println(batteryHealth < 50 ?"Battery Health can't be less than 50%!":"Input Error!");
+			System.out.println("Battery health set 80%.");
+			this.batteryHealth=80;
+		}
+			
+		else
+			this.batteryHealth=batteryHealth;
+		
+	}
+
+	public boolean isHasTwoSIMcard() {
+		return this.hasTwoSIMcard;
+	}
+
+	public void setHasTwoSIMcard(boolean hasTwoSIMcard) {
+		this.hasTwoSIMcard = hasTwoSIMcard;
+	}
+
+	public double setBrandPrice(double brandPrice) {
+		return this.brandPrice;
+	}
+
+	public double getBrandPrice() {
+		
+		double bprice=0;
+		switch(this.manufactures)
+		{
+		case "Apple":
+			bprice = 350;
+			break;
+			
+		case "Samsung":
+			bprice = 200;
+			break;
+			
+		case "Nokia":
+			bprice= 180;
+			break;
+			
+		case "Huwei":
+			bprice = 190;
+			break;
+		}
+
+		return bprice;
+	}
+
+	public double getTotalPrice() {
+		
+		double price = 0;
+		price += getBrandPrice();
+		
+		switch(this.storage)
+		{
+		case 8:
+			price+= 20;
+			break;			
+		case 16:
+			price+= 25;
+			break;			
+		case 32:
+			price+= 30;
+			break;			
+		case 128:
+			price+= 128;
+			break;
+		}
+		
+		if(batteryHealth <= 70)
+			price -= 10;
+		
+		if(this.hasTwoSIMcard)
+			price += 35;
+		
+		return price;
+	}
+
+	public void setTotalPrice(double totalPrice) {
+		this.totalPrice = totalPrice;
+	}
+
+		public String toString() {
+		return "Quotation For "+this.manufactures+" Mobile\nManufacture:  " + this.manufactures
+				+ "\nStorage:  " + this.storage+" GB"
+				+  "\nbatteryHealth: " + this.batteryHealth +"%"+ "\nhasTwoSIMcard=" + this.hasTwoSIMcard
+				 +"\n\nTotal Price: " + getTotalPrice()+"$";
+	}
+	
+	public static void main(String[] args)
+	{
+		Mobile mobile = new Mobile();
+		System.out.println(mobile);
+	}
+}

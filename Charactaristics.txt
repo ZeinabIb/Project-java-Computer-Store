@@ -1,0 +1,186 @@
+public class Characteristics {
+	
+	public String brand;
+	private int memory;
+    private int pixels;
+    private int generation;
+    private boolean privacyShutterWebcam;
+    private int core;
+    
+	public Characteristics()
+	{
+		this.brand ="Lenovo";
+		this.memory = 4;
+		this.pixels = 1;
+		this.generation = 10;
+		this.privacyShutterWebcam =true;
+		this.core = 5;
+	}
+	
+	
+	public Characteristics(String brand, int memory, 
+			int pixels,  int generation, boolean camera, int core)
+	{
+		if(brand.equalsIgnoreCase("Lenovo")||brand.equalsIgnoreCase("HP")||
+				brand.equalsIgnoreCase("Toshiba")||brand.equalsIgnoreCase("acer")||
+				brand.equalsIgnoreCase("Dell")||brand.equalsIgnoreCase("MacBook"))
+			this.brand = brand;
+		
+		else {
+			System.out.println("Brand not valide! brand set 'Lenovo' as default.");
+			this.brand = "Lenovo";
+		}
+					
+		if(memory < 2 || memory > 16 && memory%2 != 0) {
+			System.out.println("Memory should be between 2 and 16.");
+			this.memory = 4;
+		}		
+		else 
+			this.memory = memory;
+	
+		if(pixels > 0 && pixels < 5)
+			this.pixels = pixels;
+		else {
+			System.out.println("Pixels Choice not valide! choice deafult = 1.");
+			this.pixels = 1;
+		}
+		
+		if(generation < 7 || generation > 11) {
+			System.out.println("Generations valide from 7th to 11th generation.");
+			this.generation = 10;
+		}
+		else 
+			this.generation = generation;		
+		this.privacyShutterWebcam = camera;
+		
+		if(core == 3 || core == 5 || core == 7 )
+			this.core = core;
+		else {
+			System.out.println("core should be core i3 , i5 or i7. ");
+			this.core = 5;
+			
+		}	
+	}
+
+	public String getBrand() {
+		return this.brand;
+	}
+
+	public void setBrand(String brand) {	
+		if(brand.equalsIgnoreCase("Lenovo")||brand.equalsIgnoreCase("HP")||
+				brand.equalsIgnoreCase("Toshiba")||brand.equalsIgnoreCase("acer")||
+				brand.equalsIgnoreCase("Dell")||brand.equalsIgnoreCase("MacBook"))
+			this.brand = brand;
+		
+		else {
+			System.out.println("Brand not valide! brand set 'Lenovo' as default.");
+			this.brand = "Lenovo";
+		}
+	}
+
+	public int getMemory() {
+		return this.memory;
+	}
+
+
+	public void setMemory(int memory) {
+		
+		if(memory > 2 && memory < 17 && memory%2 == 0)
+			this.memory = memory;
+		else {
+			System.out.println("Memory should be between 2 and 16.");
+			this.memory = 4;
+		}
+	}
+
+	public int getPixels() {
+		return this.pixels;
+	}
+
+	public void setPixels(int pixels) {
+		if(pixels > 1 && pixels < 4)
+			this.pixels = pixels;
+		else {
+			System.out.println("Choice not valide! choice deafult = 1.");
+			this.pixels = 1;
+		}
+	}
+
+	public int getGeneration() {
+		return generation;
+	}
+
+	public void setGeneration(int generation) {
+		
+		if(generation < 7 || generation > 11) {
+			System.out.println("Generations valide from 7th to 11th generation.");
+			this.generation = 10;
+		}
+		else 
+			this.generation = generation;
+	}
+
+	public boolean isPrivacyShutterWebcam() {
+		return this.privacyShutterWebcam;
+	}
+
+	public void setPrivacyShutterWebcam(boolean privacyShutterWebcam) {
+		this.privacyShutterWebcam = privacyShutterWebcam;
+	}
+
+	public int getCore() {
+		return this.core;
+	}
+
+	public void setCore(int core)
+	{
+		if(core == 3 || core == 5 || core == 7 )
+			this.core = core;
+		else
+		{
+			System.out.println("core should be core i3 , i5 or i7. ");
+			this.core = 5;
+	    }	
+	}
+	
+	public String toString() {	
+		String str = null;
+		switch(this.pixels)
+		{
+		case 1:
+			str="1280 x 1024 Super-eXtended Graphics Array (SXGA)";
+			break;			
+		case 2:
+			str="1600 x 900 High Definition Plus (HD+)";
+			break;			
+		case 3:
+			str="1600 x 900 High Definition Plus (HD+)";
+			break;			
+		case 4:
+			str="1920 x 1080 Full High Definiti on (FHD)";
+			break;			
+		}
+		return "Characteristics\n-------------------"
+				+ " \nbrand : \t\t" + this.brand
+				+ "\npixels : \t\t" + str
+				+ "\nmemory : \t\t" + this.memory+" RAMGB" 
+				+ "\ngeneration : \t\t" + this.generation+"th" 
+				+ "\nprivacyShutterWebcam : \t" + this.privacyShutterWebcam 
+				+ "\ncore : \t\t\t" +"i"+ this.core;				
+	}
+	
+	public static void main(String[] args)
+	{
+		System.out.println("Default characteristics:\n\n");
+		Characteristics charc = new Characteristics();
+		System.out.println(charc);	
+	}
+}
+
+  
+
+		
+	
+	
+
+

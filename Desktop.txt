@@ -1,0 +1,186 @@
+import java.text.NumberFormat;
+import java.util.StringJoiner;
+
+public class Desktop extends Characteristics implements Calculate {	
+	private double processorSpeed;
+	private double memoryPrice;
+	private double ProcessorPrice;
+	private double basePrice;
+	private double totalPrice;
+	
+	private static int numberOfSoldComputers;
+
+	private static double pricePerGHz = 50;
+	private static double pricePerRAMGB = 20;
+	
+	
+	public Desktop()
+	{
+		super();
+		this.processorSpeed = 2;
+		this.memoryPrice = getMemory()*pricePerRAMGB;
+	}
+		
+	public Desktop(String brand,int memory,int pixels,int generation,boolean cam,int core,double processorSpeed)
+	{
+		super(brand,memory,pixels,generation,cam,
+				core);
+		
+		if(processorSpeed < 1 || processorSpeed > 5)
+			this.processorSpeed = 2;
+		else
+			this.processorSpeed =processorSpeed;	
+
+	}
+	public Desktop(String brand, int memory, int CPU, 
+			int pixels, int screenSize, int generation, boolean camera, int core,int ram,
+			double processorSpeed)
+	{
+		super(brand,memory,pixels,generation,camera,
+				core);
+		
+		if(processorSpeed < 1 || processorSpeed > 5)
+			this.processorSpeed = 2;
+		else
+			this.processorSpeed =processorSpeed;			
+	}
+
+
+	public double getProcessorSpeed() {
+		return this.processorSpeed;
+	}
+
+	public void setProcessorSpeed(double processorSpeed) {
+		if(processorSpeed < 1 || processorSpeed > 5)
+			this.processorSpeed = 2;
+		else
+			this.processorSpeed = processorSpeed;
+	}
+
+	public double getMemoryPrice() {
+		return memoryPrice;
+	}
+
+	public void setMemoryPrice(double memoryPrice) {
+		this.memoryPrice = memoryPrice;
+	}
+
+	public double calculateProcessorPrice(double processorSpeed)
+	{
+		double processorPrice = processorSpeed* pricePerGHz;
+		this.ProcessorPrice = processorPrice;
+		return this.ProcessorPrice;
+	}
+	
+	public double calculateMemoryPrice(int memory)
+	{
+		setMemory(memory);
+		memoryPrice = getMemory()*pricePerRAMGB;
+		return memoryPrice;
+	}
+
+	
+	
+	
+	public double getBasePrice() {
+		switch(this.brand)
+		{
+		case "HP":
+			this.basePrice = 520;
+			break;
+			
+		case "Lenovo":
+			this.basePrice = 369;
+			break;
+			
+		case "Dell":
+			this.basePrice = 475;
+			break;
+			
+		case "Toshiba":
+			this.basePrice = 135;
+			break;
+			
+		case "MacBook":
+			this.basePrice = 800;
+			break;				
+		}
+		
+		return this.basePrice;
+	}
+
+	public double getTotalPrice() {
+		calculateTotalPrice(this.memoryPrice,this.ProcessorPrice);		
+		return this.totalPrice;
+	}
+	
+	public double calculateTotalPrice(double memoryPrice,double processorPrice) {
+		this.memoryPrice = memoryPrice;
+		this.ProcessorPrice = processorPrice;
+		double price = 0;
+		price += this.basePrice;
+		price += getMemoryPrice();
+		price += calculateProcessorPrice(this.getMemory());
+		
+		this.totalPrice = price;
+		return this.totalPrice;	
+	}
+
+	public void setTotalPrice(double totalPrice) {
+		
+		if( totalPrice > 135)
+		this.totalPrice = totalPrice;
+		else
+			System.out.println("Price Incorrect!");
+	}
+
+	public static double getPricePerGHz() {
+		return pricePerGHz;
+	}
+
+
+	public static void setPricePerGHz(double pricePerGHz) {
+		Desktop.pricePerGHz = pricePerGHz;
+	}
+
+	public static double getPricePerRAMGB() {
+		return pricePerRAMGB;
+	}
+
+	public static void setPricePerRAMGB(double pricePerRAMGB) {
+		Desktop.pricePerRAMGB = pricePerRAMGB;
+	}
+	
+	public void generateQuote ()
+	{
+		StringJoiner sj = new StringJoiner("");
+		NumberFormat fmt = NumberFormat.getCurrencyInstance();
+		sj.add("Quotation for "+ this.brand +" Desktop"+"\n");
+		sj.add("\nBase Price \t\t\t$"+getBasePrice()+"\n");
+		sj.add("CPU \t\t"+processorSpeed +"GH \t\t$"+ calculateProcessorPrice(this.processorSpeed)+"\n");
+		sj.add("Memory\t\t" + getMemory() + " GB\t\t$" + calculateMemoryPrice(this.getMemory())+"\n");
+		
+		sj.add("Total Cost:\t\t\t$" + calculateTotalPrice(this.memoryPrice,this.ProcessorPrice)+"\n");
+		System.out.println(sj);
+	}
+	
+	public void sell(){
+		numberOfSoldComputers ++;		
+	}
+	
+	public static int getnumberOfSoldComputers() {
+		return numberOfSoldComputers;
+	}
+	
+
+	public static void main(String[] args)
+	{
+		System.out.println("Default characteristics:\n\n");
+		
+		Desktop default_desktop = new Desktop();	
+		System.out.println(default_desktop);
+		System.out.println();
+		default_desktop.generateQuote();	
+	}
+
+}

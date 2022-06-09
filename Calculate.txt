@@ -1,0 +1,7 @@
+public interface Calculate {
+
+	public abstract double calculateProcessorPrice(double processorSpeed);
+	public double calculateMemoryPrice(int memory);
+    double calculateTotalPrice(double processorPrice,double memoryPrice);
+	
+}

@@ -1,0 +1,82 @@
+import java.time.LocalDateTime;
+import java.util.Scanner;
+public class Settings {
+	public String firstName;
+	public String lastName;
+	private String email;
+	private String phoneNumber;
+	public String id;
+	
+	public Settings() {
+		
+		this.firstName="First";
+		this.lastName="Last";
+		this.email=(firstName+lastName).toLowerCase()+"@gmail.com";
+		this.phoneNumber="00-0000";
+		this.id= lastName.substring(0,2).toUpperCase()
+				+ "-" + firstName.substring(0,1).toUpperCase()
+				+ "@#" + (int)(Math.random() * 100 + 899);
+
+	}
+	public Settings(String fname,String lname) {
+		
+		this.firstName = fname;
+		this.lastName = lname;
+		
+		this.email=(firstName+lastName).toLowerCase()+"@gmail.com";
+		//id    
+		this.id= lastName.substring(0,2).toUpperCase()
+				+ "-" + firstName.substring(0,1).toUpperCase()
+				+ "@#" + (int)(Math.random() * 100 + 899);
+		
+		this.phoneNumber = getPhoneNumber();
+	}       
+
+	//getters and setters
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
+	}
+	public String getFirstName() {
+		return this.firstName;
+	}
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
+	}
+	public String getLastName() {
+		return this.lastName;
+	}
+
+	public String getEmail() {
+		this.email = this.firstName+this.lastName+"@gmail.com";
+		return this.email;
+	}
+	
+	public void setPhoneNumber(String phoneNumber) {
+		Scanner scan=new Scanner(System.in);
+		if(phoneNumber.length()==8) {
+			this.phoneNumber=phoneNumber;
+		}
+		else
+			System.out.println("enter again your phone number ");
+		    phoneNumber=scan.nextLine();
+	}
+	public String getPhoneNumber() {
+		return this.phoneNumber;
+	}
+	
+	public String getId() {
+		return this.id;
+	}
+	
+	//toString
+	public String toString() {
+		return "window lastVersion : 11 "+"\nUsername: "+this.firstName+" "+this.lastName+"\nEmail: "+this.email+
+				"\nPhone numbe: "+this.phoneNumber+"\n"+"\nGenerate ID..."+"\nid: "+this.id+"\n"+
+				"\nRegion : Lebanon"+"\t\t "+"\nDate:"+java.time.LocalDate.now()+"\nTime: "+java.time.LocalTime.now();
+	}
+	public static void main(String[] args)
+	{
+		Settings setting = new Settings();
+		System.out.println(setting);	
+	}
+}

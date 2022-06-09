@@ -1,0 +1,177 @@
+import java.text.NumberFormat;
+import java.util.ArrayList;
+import java.text.DecimalFormat;
+public class ShoppingCart {
+	private ArrayList<Laptop> laptops = new ArrayList<>();
+	private	ArrayList<Desktop> desktops = new ArrayList<>();
+	private	ArrayList<Mobile> mobiles = new ArrayList<>();
+	
+	private double newSubtotal;
+
+	
+	private double mobileSubtotal , desktopSubtotal, laptopSubtotal;
+	private double totalPrice , priceAfterDiscount;
+	//default
+	public ShoppingCart (ArrayList<Laptop> laptop,ArrayList<Desktop> desktop ,ArrayList<Mobile> mobile){
+		this.laptops = laptop;
+		this.desktops=desktop;
+		this.mobiles = mobile;
+	}
+	
+		
+	public ArrayList<Laptop> getLaptops() {		
+		return this.laptops;
+	}
+
+
+	public void setLaptops(ArrayList<Laptop> laptops) {
+		this.laptops = laptops;
+	}
+
+
+	public ArrayList<Desktop> getDesktops() {
+		return this.desktops;
+	}
+
+
+	public void setDesktops(ArrayList<Desktop> desktops) {
+		this.desktops = desktops;
+	}
+
+
+	public ArrayList<Mobile> getMobiles() {
+		return this.mobiles;
+	}
+
+
+
+
+	public void setMobiles(ArrayList<Mobile> mobiles) {
+		this.mobiles = mobiles;
+	}
+
+
+
+
+	public double getMobileSubTotal() {	
+		double mobileSub = 0;
+		for(int i =0; i<mobiles.size();i++)
+			mobileSub += mobiles.get(i).getTotalPrice();
+		
+		this.mobileSubtotal = mobileSub;
+		return this.mobileSubtotal;
+	}
+
+		public double getLaptopSubtotal() {
+			
+		double laptopSub = 0;
+		for(int i =0; i< laptops.size();i++)
+			laptopSub += laptops.get(i).getTotalPrice()+this.newSubtotal;
+		
+		this.laptopSubtotal = laptopSub;
+		return this.laptopSubtotal;
+		}
+		
+		
+		public double getDesktopSubtotal() {
+		double desktopSub = 0;
+		for(int i =0; i< desktops.size();i++)
+			desktopSub += desktops.get(i).getTotalPrice();
+		
+		this.desktopSubtotal = desktopSub;		
+		return this.desktopSubtotal;
+	}
+		
+		public double totalPrice() {
+			this.totalPrice = this.desktopSubtotal + this.laptopSubtotal + this.mobileSubtotal;
+			return this.totalPrice;
+		}
+		
+		
+		public double Discount()
+		{
+			DecimalFormat fmt = new DecimalFormat("0.###");
+			if(this.totalPrice > 400 && this.totalPrice < 600) {
+				this.priceAfterDiscount = this.totalPrice-(this.totalPrice*0.2);
+				System.out.println("You get a 20% Discount!");
+				fmt.format(this.priceAfterDiscount);
+				return this.priceAfterDiscount;
+			}
+			else {
+				System.out.println("You get a 40% Discount!");
+				this.priceAfterDiscount = this.totalPrice-(this.totalPrice*0.4);
+				fmt.format(this.priceAfterDiscount);
+				return this.priceAfterDiscount;
+			}
+			
+		}
+		
+		public void addLaptop(Laptop newLaptop) {
+			laptops.add(newLaptop);
+		}
+		
+		public void addComputer(Desktop newComputer) {
+			desktops.add(newComputer);
+		}
+		
+		public void addMobile(Mobile newMobile) {
+			mobiles.add(newMobile);
+		}
+		
+		public void removeLaptop(int i) {
+					laptops.remove((i-1));
+		}
+		
+		public void removeComputer(int i) {
+					desktops.remove((i-1));
+		}
+		
+		public void removeMobile(int i) {
+				   mobiles.remove((i-1));
+		}
+		
+						
+		public String toString() {
+			return "RECIPT\n"+"Item\t\t"+"Quantity\t\t"+"Price"
+		+"\nMobile\t\t"+mobiles.size()+"\t\t\t$"+getMobileSubTotal()
+		+"\nLaptop\t\t"+laptops.size()+"\t\t\t$"+getLaptopSubtotal()
+	    +"\nDesktop\t\t"+desktops.size()+"\t\t\t$"+getDesktopSubtotal()
+	    +"\n\nTotal Price: $"+totalPrice()+"\n"
+	    +"Price After Discount : $"+Discount();
+		}
+				
+ 	public static void main(String[] args) {
+		
+ 		Laptop laptop = new Laptop();
+ 		Desktop desktop = new Desktop();
+ 		Mobile mobile = new Mobile();
+
+	   	    ArrayList<Laptop> laptops = new ArrayList<>();
+			ArrayList<Desktop> desktops = new ArrayList<>();
+			ArrayList<Mobile> mobiles = new ArrayList<>();
+			
+			laptop.getTotalPrice();
+			laptops.add(laptop);
+			desktops.add(desktop);
+			mobiles.add(mobile);
+			
+			
+
+     	ShoppingCart list = new ShoppingCart(laptops, desktops, mobiles);
+		System.out.println(list);
+		
+		Desktop newDesktop = new Desktop();
+		list.addComputer(newDesktop);
+		System.out.println(newDesktop.getTotalPrice());
+		
+		Laptop newLaptop = new Laptop();
+		list.addLaptop(newLaptop);
+		System.out.println(list);
+		
+		
+	}
+
+		// TODO Auto-generated method stub
+		
+	}
+	

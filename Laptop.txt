@@ -1,0 +1,181 @@
+import java.text.NumberFormat;
+import java.util.StringJoiner;
+public class Laptop extends Characteristics implements Calculate{
+    private boolean hasDvd;
+    private double processorSpeed;
+    private double processorPrice;
+    private double memoryPrice;
+    private boolean gaming;
+    private double basePrice;
+    private double totalPrice;
+
+    private static double priceOfDVD = 10;
+    private static double pricePerGHz = 70;
+    private static double pricePerRAMGB = 20;
+
+    public Laptop() {
+    	
+    	super();
+        this.hasDvd=true;
+        this.processorSpeed = 2;
+        this.gaming=false;
+        this.memoryPrice = getMemory()*pricePerRAMGB;
+        switch(getBrand()){      
+        case "macBook":       	
+            this.basePrice = 1010.0;
+            break;
+        case "Lenovo":
+            this.basePrice = 400.0;
+            break;
+        case "HP":
+            this.basePrice = 300.0;
+            break;
+        case "Dell":
+            this.basePrice = 205.0;
+            break;
+        case "Toshiba":
+            this.basePrice = 150.0;
+            break;
+        }
+         
+    }
+    public Laptop(double processorSpeed,
+                  boolean gaming , boolean hasDvd) {
+    	super(); 
+        if(processorSpeed > 1 || processorSpeed < 5) {
+        this.processorSpeed =processorSpeed;
+        }
+        else {
+         this.processorSpeed = 2;
+        }
+        this.gaming=gaming;
+        this.hasDvd= hasDvd;
+    }
+    
+ public Laptop(String brand,int memory,int generation,int pixels,boolean cam,int core
+                  ,boolean hasDvd,double processorSpeed,boolean gaming) {
+	 
+        super(brand,memory,pixels,generation,cam,
+				core);
+        
+        if(processorSpeed > 1 || processorSpeed < 5) {
+        this.processorSpeed =processorSpeed;
+        }
+        else {
+        this.processorSpeed = 2;
+        }
+        this.gaming=gaming;
+        this.hasDvd=hasDvd;
+        }
+
+        public double calculateMemoryPrice(int memory){
+        	
+            memory = getMemory();
+            memoryPrice = memory*pricePerRAMGB;
+            return memoryPrice;
+        }
+
+        public double getBasePrice() {
+        	switch(this.brand){
+            case "MacBook":
+                this.basePrice = 1010.0;
+                break;
+            case "Lenovo":
+                this.basePrice = 400.0;
+                break;
+            case "HP":
+                this.basePrice = 300.0;
+                break;
+            case "Dell":
+                this.basePrice = 205.0;
+                break;
+            case "Toshiba":
+                this.basePrice = 150.0;
+                break;
+                }
+        	
+            return this.basePrice;
+        }
+        
+        
+  
+
+        public double getProcessorSpeed() {
+            return this.processorSpeed;
+        }
+        public void setProcessorSpeed(double processorSpeed) {
+            if(processorSpeed > 1 || processorSpeed < 5) {
+            this.processorSpeed =processorSpeed;
+            }
+        else {
+            System.out.println("Error processor speed set 2!");
+            this.processorSpeed=2;
+            }
+       }
+       public boolean isHasDvd() {
+            return hasDvd;
+       }
+       public void setHasDvd(boolean hasDvd) {
+            this.hasDvd = hasDvd;
+       }
+       public boolean isGaming() {
+            return this.gaming;
+       }
+       public void setGaming(boolean gaming) {
+            this.gaming = gaming;
+       }
+       public double calculateTotalPrice(double processorPrice,double memoryPrice) {
+       double price = 0;
+       price += this.basePrice;
+       price += calculateProcessorPrice(this.processorSpeed);
+       price += this.memoryPrice;
+       if(hasDvd)
+            price+=priceOfDVD;
+       if(gaming)
+            price+=75;
+            this.totalPrice = price;
+       return this.totalPrice;
+       }
+       
+       public double calculateProcessorPrice(double processorSpeed){
+    	   
+           double processorPrice = processorSpeed* pricePerGHz;
+           this.processorPrice = processorPrice;
+           return this.processorPrice;
+       }
+       public double getTotalPrice() {  
+    	   calculateTotalPrice(this.processorPrice,this.memoryPrice);
+           return this.totalPrice ;
+       }
+       public void generateQuote ()
+   	{
+   		StringJoiner sj = new StringJoiner("");
+   		NumberFormat fmt = NumberFormat.getCurrencyInstance();
+   		
+   		sj.add("Quotation for "+getBrand()+" Laptop"+"\n");
+   
+   		sj.add("base Price \t\t\t$"+getBasePrice()+"\n");
+   		sj.add("CPU \t\t"+processorSpeed +"GH \t\t$"+ calculateProcessorPrice(this.processorSpeed)+"\n");
+   		sj.add("Memory\t\t" + getMemory() + " GB\t\t$" + calculateMemoryPrice(this.getMemory())+"\n");
+   		
+   		sj.add("Total Cost:\t\t\t$" + calculateTotalPrice(this.memoryPrice,this.processorPrice)+"\n");
+   		System.out.println(sj.toString());
+   	}
+       
+       public String toString() {
+           return"\nHas DVD:\t\t "+this.hasDvd+"\nGaming:\t\t\t "+this.gaming
+                 +"\nCPU:\t\t\t "+this.processorSpeed;
+}
+         public static void main(String[] args){
+        	 
+             Characteristics charc = new Characteristics();
+             System.out.println(charc);
+             System.out.println();
+            
+             Laptop laptop = new Laptop();
+             laptop.generateQuote();
+            
+             System.out.println("About " + charc.getBrand() +" Laptop");
+             System.out.println(laptop); 
+         }
+}

@@ -1,0 +1,658 @@
+import java.util.Scanner;
+import java.io.*;
+import java.util.ArrayList;
+public class ComputerStore {
+	
+	public static void main(String[] args) throws IOException {
+		// TODO Auto-generated method stub
+		Scanner scan = new Scanner(System.in);
+		
+		ArrayList<Laptop> laptops = new ArrayList<>();
+		ArrayList<Desktop> desktops = new ArrayList<>();
+		ArrayList<Mobile> mobiles = new ArrayList<>();
+		
+		Laptop laptop = new Laptop();
+		Desktop desktop = new Desktop();
+		Mobile mobile = new Mobile();
+
+		System.out.println("\t\t\t\tWELCOME TO THE COMPUTER STORE"
+				+ "\n\t\t\t\t-----------------------------\n");
+	
+		String more;
+		int item;
+		String buy="";
+		do {
+			
+		System.out.println("What do you like to costumise?");
+		System.out.println("1-Laptop\n2-Computer\n3-Mobile");
+		System.out.print(">");
+		item = scan.nextInt();
+		
+		while( item <= 0 || item >= 4) {
+			System.out.println("What do you like to costumise?");
+			System.out.println("1-Laptop\n2-Computer\n3-Mobile");
+			System.out.print(">");
+			item = scan.nextInt();
+		}
+		
+		scan.nextLine();
+		switch(item) {
+		case 1:
+			System.out.println("Brand available: Lenovo - HP - Toshiba - Acer - Dell - Mac Book");
+			System.out.print("Choose The Brand: ");
+			String brand = scan.nextLine();
+			
+			System.out.print("Set Memory Ram ( 2 RAMGB -> 16 RAMGB) : ");
+			int memory = scan.nextInt();
+			
+			System.out.println("Screen Pixels: ");
+			System.out.println("\t1-1280 x 1024 Super-eXtended Graphics Array (SXGA)"
+					+"\n\t2-1600 x 900 High Definition Plus (HD+)"
+					+"\n\t3-1600 x 900 High Definition Plus (HD+)"
+					+"\n\t4-1920 x 1080 Full High Definiti on (FHD)");
+			System.out.print(">");
+			int pixels = scan.nextInt();
+			
+			System.out.print("Which generation ? (9 10 or 11th generation):");
+			int generation = scan.nextInt();
+			
+			scan.nextLine();
+			System.out.print("Would you like to add the privacy Shutter Web cam Feature? (yes / no)");
+			String camFeature = scan.nextLine();
+			
+			boolean privacyCam;
+			if(camFeature.equalsIgnoreCase("yes"))
+				privacyCam = true;
+			else
+				privacyCam = false;
+
+			int core;
+			System.out.println("Core ( i3 - i5 - i7) :");
+			core = scan.nextInt();
+
+			
+			System.out.print("Enter Processor Speed ( 1 to 5):");
+			double processorSpeed = scan.nextDouble();
+			
+			scan.nextLine();
+			System.out.println("Available DVD drive in your laptop?( yes / no )");
+			
+            String dvdDrive = scan.nextLine();
+			
+			boolean hasDVD;
+			if(dvdDrive.equalsIgnoreCase("yes"))
+				hasDVD = true;
+			else
+				hasDVD = false;
+			
+			System.out.println("Yould you like a gaming laptop? ( yes / no )");
+			
+            String gaming = scan.nextLine();
+			boolean isGaming;
+			if(dvdDrive.equalsIgnoreCase("yes"))
+				isGaming = true;
+			else
+				isGaming = false;
+			
+			  laptop = new Laptop (brand,memory,generation,pixels,privacyCam,core,hasDVD,
+						processorSpeed, isGaming );
+			
+			laptop.getBasePrice();
+			System.out.println();
+			laptop.generateQuote();
+			System.out.println();
+			System.out.println(laptop);
+			
+			System.out.println();
+			System.out.println("Woul you like to buy this Laptop?");
+			buy = scan.nextLine();
+			
+			if(buy.equalsIgnoreCase("yes")) {
+			laptops.add(laptop);
+			System.out.println("Laptop added to Your List!");
+			
+			System.out.println();
+			System.out.println("Set Laptop Settings");
+			
+			Settings laptop_setting = new Settings();
+			
+			System.out.println("Enter Your Full name:");
+			String firstName = scan.nextLine();
+			String lastName = scan.nextLine();
+			
+			System.out.println("Phone number:");
+			laptop_setting.setPhoneNumber(scan.nextLine());
+			
+			laptop_setting = new Settings(firstName,lastName);
+			System.out.println();
+			System.out.println(laptop_setting);
+			
+			}
+			else
+				System.out.println();
+			break;
+			
+		case 2:
+			System.out.println("Brand available: Lenovo - HP - Toshiba - Acer - Dell - Mac Book");
+			System.out.print("Choose The Brand: ");
+			String brand2 = scan.nextLine();
+			
+			
+			System.out.print("Set Memory Ram ( 2 RAMGB -> 16 RAMGB) : ");
+			int memory2 = scan.nextInt();
+			
+			System.out.println("Screen Pixels: ");
+			System.out.println("\t1-1280 x 1024 Super-eXtended Graphics Array (SXGA)"
+					+"\n\t2-1600 x 900 High Definition Plus (HD+)"
+					+"\n\t3-1600 x 900 High Definition Plus (HD+)"
+					+"\n\t4-1920 x 1080 Full High Definition (FHD)");
+			System.out.print(">");
+			int pixels2 = scan.nextInt();
+			
+			System.out.print("Which generation ? (9 10 or 11th generation):");
+			int generation2 = scan.nextInt();
+			
+			scan.nextLine();
+			System.out.print("Would you like to add the privacy Shutter Web cam Feature? (yes / no)");
+			String camFeature2 = scan.nextLine();
+			
+			boolean privacyCam2;
+			if(camFeature2.equalsIgnoreCase("yes"))
+				privacyCam2 = true;
+			else
+				privacyCam2 = false;
+
+			int core2;
+			System.out.println("Core ( i3 - i5 - i7) :");
+			core2 = scan.nextInt();
+	
+			System.out.print("Enter Processor Speed ( 1 to 5):");
+			double processorSpeed2 = scan.nextDouble();
+					
+			desktop = new Desktop (brand2,memory2,pixels2,generation2,privacyCam2,core2, processorSpeed2);	
+		
+			System.out.println();
+			System.out.println();
+            System.out.println();
+            
+              
+            desktop.getBasePrice();
+
+            
+            System.out.println(desktop);
+			desktop.generateQuote();
+			
+			System.out.println();
+			scan.nextLine();
+			System.out.println("Woul you like to buy this Computer?");
+			String buy2;
+			buy2 = scan.nextLine();
+			
+			if(buy2.equalsIgnoreCase("yes")) {
+			desktops.add(desktop);
+			desktop.sell();
+			System.out.println("Desktop added to Your List!");
+			
+			System.out.println();
+			System.out.println("Set Desktop Settings");
+			
+			Settings desktop_setting = new Settings();
+			
+			System.out.println("Enter Your Full name:");
+			String fname = scan.nextLine();
+			String lname = scan.nextLine();
+			
+			System.out.println("Phone number:");
+			desktop_setting.setPhoneNumber(scan.nextLine());
+
+			desktop_setting = new Settings(fname,lname);
+			System.out.println(desktop_setting);
+			
+			}
+			else
+				System.out.println();
+			break;	
+			
+		case 3:
+			System.out.println("Choose The Manifacture:\t\t UP to");
+			System.out.println("Apple\t\t\t\t350$"
+					+"\nSamsung\t\t\t\t200$"
+					+"\nHawei\t\t\t\t180$"
+					+"\nNokia\t\t\t\t190$");
+			System.out.println();
+			System.out.print("Manifacture: ");
+			String manufacture = scan.nextLine();
+			
+			mobile.setManufactures(manufacture);
+			
+			System.out.println();
+			System.out.println("Set Storage: 8GB / 16GB / 32GB / 64GB / 128GB");
+			mobile.setStorage(scan.nextInt());
+			
+			System.out.println("Set Battery Health ( greater than 50% ):");
+			mobile.setBatteryHealth(scan.nextDouble());
+			
+			scan.nextLine();
+			System.out.print("Would you prefer 2 SIM cards ?(yes / no):");
+			String twoSim = scan.nextLine();
+			
+			if(twoSim.equalsIgnoreCase("yes"))
+				mobile.setHasTwoSIMcard(true);
+			else
+				mobile.setHasTwoSIMcard(false);	
+			
+			mobile.getBrandPrice();
+			mobile.getTotalPrice();
+			System.out.println(mobile);
+			
+			System.out.println();
+			System.out.println("Woul you like to buy this Mobile?");
+			String buy3 = scan.nextLine();
+			
+			if(buy3.equalsIgnoreCase("yes")) {
+			mobiles.add(mobile);
+			System.out.println("Mobile added to Your List!");
+			}
+			break;
+		}
+		
+		
+		System.out.println();
+		System.out.println();
+		System.out.println("Would you like to costumise more?");
+		more = scan.nextLine();
+		
+		}while(more.equalsIgnoreCase("yes"));
+		
+			
+		ShoppingCart list = new ShoppingCart(laptops,desktops,mobiles);
+		list.getDesktopSubtotal();
+		System.out.println(list);
+		
+		System.out.println("Do you want to remove or add to your List?");
+		String add = scan.nextLine();
+		
+		if(add.equalsIgnoreCase("yes")) {
+		
+		String y="";
+		do {
+		
+		
+		if(add.equalsIgnoreCase("yes")) {
+			System.out.println("1-Add Laptop\n2-Add Computer \n3-Add Mobile"
+					+"\n4-Remove Laptop\n5-Remove Computer\n6-Remove Mobile\n7-Exit");
+			int x = scan.nextInt();
+			if(x==4 && laptops.size()==0) {
+				System.out.println("You have NO laptops in your list.");
+			}
+			else
+				if(x==5 && desktops.size()==0) {
+					System.out.println("You have NO computers in your list.");
+				}
+				else
+					if(x==6 && mobiles.size()==0) {
+						System.out.println("You have NO mobiles in your list.");
+					}
+					else {
+						switch(x) {
+						case 1:
+							System.out.println("\nAdd new laptop\n");
+							
+							scan.nextLine();
+							System.out.println("Brand available: Lenovo - HP - Toshiba - Acer - Dell - Mac Book");
+							System.out.print(" Brand of the new laptop: ");
+							String newBrand = scan.nextLine();
+							
+							System.out.print("Set Memory Ram of the new laptop( 2 RAMGB -> 16 RAMGB) : ");
+							int newMemory = scan.nextInt();
+							
+							System.out.println("Screen Pixels of the new laptop: ");
+							System.out.println("\t1-1280 x 1024 Super-eXtended Graphics Array (SXGA)"
+									+"\n\t2-1600 x 900 High Definition Plus (HD+)"
+									+"\n\t3-1600 x 900 High Definition Plus (HD+)"
+									+"\n\t4-1920 x 1080 Full High Definiti on (FHD)");
+							System.out.print(">");
+							int pixels = scan.nextInt();
+							
+							System.out.print("Generation of the new laptop  (9 10 or 11th generation):");
+							int generation = scan.nextInt();
+							
+							scan.nextLine();
+							System.out.print("Would you like to add the privacy Shutter Web cam Feature for the new laptop? (yes / no)");
+							String camFeature = scan.nextLine();
+							
+							boolean privacyCam;
+							if(camFeature.equalsIgnoreCase("yes"))
+								privacyCam = true;
+							else
+								privacyCam = false;
+
+							int core;
+							System.out.println("Core of the new laptop ( i3 - i5 - i7) :");
+							core = scan.nextInt();
+
+							
+							System.out.print("Enter Processor Speed  ( 1 to 5):");
+							double processorSpeed = scan.nextDouble();
+							
+							scan.nextLine();
+							System.out.println("Available DVD drive in your new laptop?( yes / no )");
+							
+				            String dvdDrive = scan.nextLine();
+							
+							boolean hasDVD;
+							if(dvdDrive.equalsIgnoreCase("yes"))
+								hasDVD = true;
+							else
+								hasDVD = false;
+							
+							System.out.println("would you like a gaming laptop for the new one? ( yes / no )");
+							
+				            String gaming = scan.nextLine();
+							boolean isGaming;
+							if(dvdDrive.equalsIgnoreCase("yes"))
+								isGaming = true;
+							else
+								isGaming = false;
+							Laptop newLaptop = new Laptop(newBrand,newMemory,generation,pixels,privacyCam,core,hasDVD,
+									processorSpeed, isGaming);
+							newLaptop.getTotalPrice();
+							System.out.println();
+							list.addLaptop(newLaptop);
+							break;
+							
+						case 2:
+							System.out.println("Add New computer:");
+							
+							Desktop newComputer = new Desktop();
+							scan.nextLine();
+							System.out.println("Brand available: Lenovo - HP - Toshiba - Acer - Dell - Mac Book");
+							System.out.print("Brand of the new computer: ");
+							String newBrand2 = scan.nextLine();
+							
+							
+							System.out.print("Set Memory Ram of the new computer ( 2 RAMGB -> 16 RAMGB) : ");
+							int newMemory2 = scan.nextInt();
+							
+							System.out.println("Screen Pixels of the new computer: ");
+							System.out.println("\t1-1280 x 1024 Super-eXtended Graphics Array (SXGA)"
+									+"\n\t2-1600 x 900 High Definition Plus (HD+)"
+									+"\n\t3-1600 x 900 High Definition Plus (HD+)"
+									+"\n\t4-1920 x 1080 Full High Definition (FHD)");
+							System.out.print(">");
+							int pixels2 = scan.nextInt();
+							
+							System.out.print("Which generation ? (9 10 or 11th generation):");
+							int generation2 = scan.nextInt();
+							
+							scan.nextLine();
+							System.out.print("Would you like to add the privacy Shutter Web cam Feature for the new computer? (yes / no)");
+							String camFeature2 = scan.nextLine();
+							
+							boolean privacyCam2;
+							if(camFeature2.equalsIgnoreCase("yes"))
+								privacyCam2 = true;
+							else
+								privacyCam2 = false;
+
+							int core2;
+							System.out.println("Core  ( i3 - i5 - i7) :");
+							core2 = scan.nextInt();
+					
+							System.out.print("Processor Speed ( 1 to 5):");
+							double processorSpeed2 = scan.nextDouble();
+							
+							System.out.println();
+							scan.nextLine();
+							
+							
+							newComputer.getTotalPrice();
+							newComputer = new Desktop(newBrand2,newMemory2,pixels2,generation2,privacyCam2,core2, processorSpeed2);
+							list.addComputer(newComputer);
+							break;
+							
+						case 3:
+							System.out.println("Add New mobile:");
+							System.out.println();
+							
+							Mobile newMobile = new Mobile();
+							System.out.println("Choose The Manifacture for the new mobile:\t\t\t UP to");
+							System.out.println("Apple\t\t\t\t350$"
+									+"\nSamsung\t\t\t\t200$"
+									+"\nHawei\t\t\t\t180$"
+									+"\nNokia\t\t\t\t190$");
+							
+							System.out.println();
+							scan.nextLine();
+							System.out.print(">");
+							String manufacture = scan.nextLine();
+							mobile.setManufactures(manufacture);
+							System.out.println();
+							System.out.println("Set Storage of the new mobile: 8GB / 16GB / 32GB / 64GB / 128GB");
+							mobile.setStorage(scan.nextInt());
+							
+							System.out.println("Set Battery Health of the new mobile( greater than 50% ):");
+							mobile.setBatteryHealth(scan.nextDouble());
+							
+							scan.nextLine();
+							System.out.print("Would you prefer 2 SIM cards for your new mobile ?(yes / no):");
+							String twoSim = scan.nextLine();
+							
+							if(twoSim.equalsIgnoreCase("yes"))
+								mobile.setHasTwoSIMcard(true);
+							else
+								mobile.setHasTwoSIMcard(false);	
+													
+							newMobile.getTotalPrice();
+							list.addMobile(newMobile);
+							
+							break;
+							
+						case 4:
+							System.out.println("Which Laptop do you want to remove?");
+							int i = scan.nextInt();
+							list.removeLaptop(i);
+							System.out.println(list);
+							break;
+							
+						case 5:
+							System.out.println("Which Computer do you want to remove?");
+							int a = scan.nextInt();
+							list.removeComputer(a);
+							System.out.println(list);
+							break;
+							
+						case 6:
+							System.out.println("Which mobile do you want to remove?");
+							int b = scan.nextInt();
+							list.removeMobile(b);
+							System.out.println(list);
+							break;
+							
+						case 7:
+							System.out.println("Exit...");
+							break;
+							
+							default:
+								System.out.println("Exit...");
+						}
+					}
+		}
+		
+		System.out.println(list);
+		scan.nextLine();
+		System.out.println("Do you want to edit more to your list?");
+		y=scan.nextLine();
+		
+	}while(y.equalsIgnoreCase("yes"));
+		
+		}
+		
+		WriteToCSV(list);
+					
+	}
+	
+	public static void WriteToCSV(ShoppingCart clist) {
+		
+		 try (PrintWriter writer = new PrintWriter("Laptop.csv")) {
+		      StringBuilder file = new StringBuilder();		
+		String DELIMITER=",";
+		String SEPARATOR="\n";
+		String HEADER = "brand,memory,generation,pixels,camera,core,hasDvd,processorSpeed,gaming,TotalPrice)";
+				
+		//Add header
+		file.append(HEADER);		
+		file.append(SEPARATOR);
+		
+		//iterate through computerList
+		for(int i=0; i<clist.getLaptops().size(); i++)
+		{
+			
+			file.append(clist.getLaptops().get(i).getBrand());
+			file.append(DELIMITER);
+			
+			file.append(clist.getLaptops().get(i).getMemory()+"");				
+			file.append(DELIMITER);
+			
+			file.append(clist.getLaptops().get(i).getGeneration()+"");				
+			file.append(DELIMITER);
+			
+			file.append(clist.getLaptops().get(i).getPixels()+"");				
+			file.append(DELIMITER);
+			
+			file.append(clist.getLaptops().get(i).isPrivacyShutterWebcam()+"");				
+			file.append(DELIMITER);
+			
+			file.append(clist.getLaptops().get(i).getCore()+"");				
+			file.append(DELIMITER);
+			
+			file.append(clist.getLaptops().get(i).isHasDvd()+"");				
+			file.append(DELIMITER);
+			
+			file.append(clist.getLaptops().get(i).getProcessorSpeed()+"");				
+			file.append(DELIMITER);
+			
+			
+			file.append(clist.getLaptops().get(i).isGaming()+"");				
+			file.append(DELIMITER);
+			
+			file.append(clist.getLaptops().get(i).getTotalPrice()+"");				
+			file.append(SEPARATOR);
+			
+			
+		}
+		 writer.write(file.toString());
+
+	      System.out.println("File Created Successfuly!");
+	
+	}
+	
+	catch(Exception e) {
+		e.printStackTrace();
+			
+		}
+		 
+		 try (PrintWriter writer = new PrintWriter("Computer.csv")) {
+
+		      StringBuilder file = new StringBuilder();
+		
+		String DELIMITER=",";
+		String SEPARATOR="\n";
+		String HEADER = "brand,memory,pixels,generation,privacyCam,core, processorSpeed,Price";
+		
+		
+		//Add header
+		file.append(HEADER);
+		
+		file.append(SEPARATOR);
+		
+		//iterate through computerList
+		for(int i=0; i<clist.getDesktops().size(); i++)
+		{
+			
+			file.append(clist.getDesktops().get(i).getBrand());
+			file.append(DELIMITER);
+			
+			file.append(clist.getDesktops().get(i).getMemory()+"");				
+			file.append(DELIMITER);
+			
+			file.append(clist.getDesktops().get(i).getGeneration()+"");				
+			file.append(DELIMITER);
+			
+			
+			
+			file.append(clist.getDesktops().get(i).isPrivacyShutterWebcam()+"");				
+			file.append(DELIMITER);
+			
+			file.append(clist.getDesktops().get(i).getCore()+"");				
+			file.append(DELIMITER);
+			
+			
+			file.append(clist.getDesktops().get(i).getProcessorSpeed()+"");				
+			file.append(DELIMITER);	
+			
+			file.append(clist.getDesktops().get(i).getTotalPrice()+"");	
+			file.append(SEPARATOR);
+			
+		}
+		 writer.write(file.toString());
+
+	      System.out.println("File Created Successfuly!");
+	
+	}
+	
+	catch(Exception e) {
+		e.printStackTrace();
+			
+		}
+		 
+		 
+		 try (PrintWriter writer = new PrintWriter("Mobile.csv")) {
+
+		      StringBuilder file = new StringBuilder();
+		
+		String DELIMITER=",";
+		String SEPARATOR="\n";
+		String HEADER = "manufactures,storage,batteryHealth,hasTwoSIMcart,brandPrice,totalPrice";
+				
+		//Add header
+		file.append(HEADER);
+		
+		file.append(SEPARATOR);
+		
+		//iterate through computerList
+		for(int i=0; i<clist.getMobiles().size(); i++)
+		{
+			
+			file.append(clist.getMobiles().get(i).getManufactures());
+			file.append(DELIMITER);
+			
+			file.append(clist.getMobiles().get(i).getStorage()+"");				
+			file.append(DELIMITER);
+			
+			file.append(clist.getMobiles().get(i).getBatteryHealth()+"");				
+			file.append(DELIMITER);
+			
+			
+			
+			file.append(clist.getMobiles().get(i).isHasTwoSIMcard()+"");				
+			file.append(DELIMITER);
+			
+			file.append(clist.getMobiles().get(i).getBrandPrice()+"");				
+			file.append(DELIMITER);
+						
+			file.append(clist.getMobiles().get(i).getTotalPrice()+"");									
+			file.append(SEPARATOR);			
+		}
+		 writer.write(file.toString());
+
+	      System.out.println("File Created Successfuly!");
+	
+	}
+	
+	catch(Exception e) {
+		e.printStackTrace();
+			
+		}
+	}	
+}
